@@ -9,7 +9,7 @@ class Program:
         while opcion!=5:
             print("""1. Ingresar empleado
             2. Buscar empleado por codigo
-            3. Mostrar empleados con evaluacion satisfactoria
+            3. Mostrar cuantos empleados tienen evaluacion satisfactoria
             4. Empleado con mejor promedio general""")
             opcion=int(input("Seleccione opcion: "))
             if opcion==1:
@@ -27,13 +27,18 @@ class Program:
                 correo=input("Ingrese correo electronico: ")
                 ##contacto=Contacto(numero_telefono, correo)
                 empleados[codigo]={"nombre":nombre, "departamento":departamento, "antiguedad":antiguedad, "evaluacion": {}, "contacto":{}}
-                empleados[codigo]["evaluacion"]={"puntualidad":puntualidad, "trabajo_equipo": trabajo_equipo, "productividad":productividad}
+
                 empleados[codigo]["contacto"]={"numero_telefono":numero_telefono, "correo":correo}
                 promedio=(puntualidad+trabajo_equipo+productividad)/3
+                satisfactorio=0
                 if promedio<=7:
                     print(f"El promedio es:{promedio}, Mejorar")
+
                 else:
                     print(f"El promedio es:{promedio}, Satisfactorio")
+                    satisfactorio+=1
+                empleados[codigo]["evaluacion"] = {"puntualidad": puntualidad, "trabajo_equipo": trabajo_equipo,"productividad": productividad, "promedio":promedio
+                                                   }
                 print("\nEmpleado ingresado satisfactoriamente...")
                 print("\npresione ENTER para continuar...")
                 input()
@@ -59,6 +64,24 @@ class Program:
                             print("Empleado no encontrado, intente de nuevo...")
                 print("\npresione ENTER para continuar...")
                 input()
+            elif opcion==3:
+                if satisfactorio==0:
+                    print("No hay empleados con evaluacion satisfactoria")
+                else:
+                    print(f"Cantidad de empleados con puntuacion satisfactoria: {satisfactorio}")
+            elif opcion==4:
+                mejor=-1
+                ganador=""
+                for promedio in empleados.items():
+                    if promedio[codigo]["contacto"]["promedio"]>mejor:
+                        mejor=promedio
+                        ganador=promedio[codigo]["nombre"]
+
+                print(f"El mejor promedio es: {mejor} de: {ganador}")
+            elif opcion==5:
+                print("Gracias por usar sistema de empleados...")
+            else:
+                print("Opcion no valida, intente de nuevo...")
 
 
 class Empleado:
