@@ -29,7 +29,14 @@ class Program:
                 empleados[codigo]={"nombre":nombre, "departamento":departamento, "antiguedad":antiguedad, "evaluacion": {}, "contacto":{}}
                 empleados[codigo]["evaluacion"]={"puntualidad":puntualidad, "trabajo_equipo": trabajo_equipo, "productividad":productividad}
                 empleados[codigo]["contacto"]={"numero_telefono":numero_telefono, "correo":correo}
+                promedio=(puntualidad+trabajo_equipo+productividad)/3
+                if promedio<=7:
+                    print(f"El promedio es:{promedio}, Mejorar")
+                else:
+                    print(f"El promedio es:{promedio}, Satisfactorio")
                 print("\nEmpleado ingresado satisfactoriamente...")
+                print("\npresione ENTER para continuar...")
+                input()
 
 class Empleado:
     @staticmethod
