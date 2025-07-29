@@ -37,6 +37,29 @@ class Program:
                 print("\nEmpleado ingresado satisfactoriamente...")
                 print("\npresione ENTER para continuar...")
                 input()
+            elif opcion==2:
+                if len(empleados)==0:
+                    print("No hay empleados registrados...")
+                    print("\npresione ENTER para continuar...")
+                    input()
+                else:
+                    codigo = input("Ingrese codigo empleado...")
+                    for codigo, datos in empleados.items():
+                        if codigo is empleados[codigo]:
+                            print(f"Codigo de empleado: {codigo}")
+                            print(f"Nombre: {datos["nombre"]}")
+                            print(f"Departamento: {datos["departamento"]}")
+                            print(f"Años de antiguedad: {datos["antiguedad"]}")
+                            print(f"Puntualidad: {datos["evaluacion"]["puntualidad"]}")
+                            print(f":Trabajo en equipo: {datos["evaluacion"]["trabajo_equipo"]}")
+                            print(f"Promedio: {promedio}")
+                            print(f"Numero de telefono: {datos["contacto"]["numero_telefono"]}")
+                            print(f"Correo electronico: {datos["contacto"]["correo"]}")
+                        else:
+                            print("Empleado no encontrado, intente de nuevo...")
+                print("\npresione ENTER para continuar...")
+                input()
+
 
 class Empleado:
     @staticmethod
