@@ -1,3 +1,6 @@
+from contextlib import nullcontext
+
+
 class Program:
     @staticmethod
     def main():
@@ -14,16 +17,19 @@ class Program:
                 codigo=input("\nIngrese codigo de empleado: ")
                 nombre=input("Ingrese nombre completo: ")
                 departamento=input("Ingrese el departamento en el que trabaja: ")
-                antiguedad=input("Ingrese los años de antiguedad que tiene en la empresa: ")
-                empleado=Empleado(codigo, nombre, departamento, antiguedad)
+                antiguedad=int(input("Ingrese los años de antiguedad que tiene en la empresa: "))
+                ##empleado=Empleado(codigo,nombre, departamento, antiguedad)
                 puntualidad=int(input("Ingrese la nota por puntualidad (1-10): "))
                 trabajo_equipo=int(input("Ingrese la nota por trabajo en equipo (1-10): "))
                 productividad=int(input("Ingrese la nota por productividad (1-10): "))
-                evaluacion=Evaluacion(puntualidad, trabajo_equipo, productividad)
+                ##evaluacion=Evaluacion(puntualidad, trabajo_equipo, productividad)
                 numero_telefono=int(input("Ingrese el numero de telefono: "))
                 correo=input("Ingrese correo electronico: ")
-                contacto=Contacto(numero_telefono, correo)
-                empleados[codigo]={empleado, evaluacion, contacto}
+                ##contacto=Contacto(numero_telefono, correo)
+                empleados[codigo]={"nombre":nombre, "departamento":departamento, "antiguedad":antiguedad, "evaluacion": {}, "contacto":{}}
+                empleados[codigo]["evaluacion"]={"puntualidad":puntualidad, "trabajo_equipo": trabajo_equipo, "productividad":productividad}
+                empleados[codigo]["contacto"]={"numero_telefono":numero_telefono, "correo":correo}
+                print("\nEmpleado ingresado satisfactoriamente...")
 
 class Empleado:
     @staticmethod
@@ -39,8 +45,14 @@ class Evaluacion:
         self.trabajo_equipo=trabajo_equipo
         self.productividad=productividad
     @staticmethod
-    def promedio(nota1, nota2, nota3):
-        promedio=(nota1+nota2+nota3)/3
+    def promedio():
+        promedio=(Evaluacion.__init__().puntualidad+Evaluacion.__init__().trabajo_equipo+Evaluacion.__init__().productividad)/3
+        print(f"El promedio es: {promedio}")
+        if promedio <=7:
+            estado="Mejorar"
+        else:
+            estado="Satisfactorio"
+        print(estado)
 
 
 class Contacto:
@@ -48,3 +60,4 @@ class Contacto:
     def __init__(self, telefono, correo):
         self.telefono=telefono
         self.correo=correo
+Program.main()
